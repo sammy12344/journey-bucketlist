@@ -1,0 +1,147 @@
+body {
+  margin:0;
+}
+svg {
+  position: absolute;
+  bottom: -60vw;
+  width:90vw;
+  height: 90vw;
+  z-index:1;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height:100%;
+  width:100%;
+  animation: appear 1s linear 1;
+  z-index:2;
+}
+
+@keyframes appear {
+  0%   { background: rgba(255,255,255,1)}
+  100% { background: rgba(255,255,255,0)}
+}
+
+
+h1 {
+  font-family: sans-serif;
+  font-weight: lighter;
+  font-size: 12px;
+  line-height: 10vh;
+  margin:0;
+  text-transform: uppercase;
+  text-align:center;
+  color: #785b7a;
+}
+
+.mounting {
+  background:white;
+}
+.frame {
+  height:85vh;
+  margin: 5vh 5vh 0vh 5vh;
+  background-image: linear-gradient(171deg, #156683, #6689a2, #a5adc1, #e2d2e2);
+  overflow: hidden;
+  position:relative;
+}
+
+/**Rotation speeds for the layers*/
+
+#Foreground {
+  animation: rotate 15s infinite linear;
+}
+
+#Road {
+  animation: rotate 30s infinite linear;
+}
+
+
+#Electricity {
+  animation: rotate 60s infinite linear;
+}
+#Hills {
+  animation: rotate 120s infinite linear;
+}
+
+#Mountains {
+  animation: rotate 1200s infinite linear;
+}
+
+@keyframes rotate {
+  0%   { transform: rotate(0deg) }
+  100% { transform: rotate(-360deg) }
+}
+
+/**Colours for the elements.*/
+
+.car {
+  fill: url(#linear-gradient);
+}
+
+.car .body {
+  fill: url(#linear-gradient);
+}
+
+.car .wheels {
+  fill: #333;
+}
+
+.car .windows {
+  fill: #fff;
+}
+
+.dark-mountains {
+  fill:#795c7a;
+}
+.snow{
+  fill:#d3d3d3;
+}
+
+.mountain {
+  fill:#9b739b;
+}
+
+.hills{
+  fill:#998a79;
+}
+
+.power-line {
+  stroke:#23180e;
+  stroke-width:3px;
+  fill:none;
+}
+.ground {
+  fill:#bcaa93;
+}
+.trunk{
+  fill:#5b4124;
+}
+.tree {
+  fill:#476047;
+}
+
+.road {
+  stroke:#000;
+  stroke-width:33px;
+  fill: none;
+  stroke-miterlimit:10;
+}
+
+.road-lines{
+  stroke:#fff;
+  stroke-width:4px;
+  stroke-dasharray:9 10;
+  stroke-miterlimit:10;
+  fill:none;
+}
+
+.light-tree{
+  fill:#648c64;
+}
+
+
+.wheels {
+  fill: url(#linear-gradient);
+}

@@ -1,0 +1,966 @@
+$default: #b0a88d;
+$bg: #45474a;
+$bg-out: lighten($bg, 2%);
+$item: rgba(darken($default, 4%), .3);
+
+/* utils */
+._grid { display: grid }
+
+._border { border: 3px solid $default; }
+
+._border-wall { 
+  border: 1px solid $default; }
+
+._door {
+  position: absolute;
+  width: 25px;
+  height: 30px;
+  border-bottom: 4px solid $bg;
+  border-right: 2px solid rgba($default, .7);
+  border-top: 1px solid rgba($default, .7);
+  border-left: 1px solid rgba($default, .7);
+  border-top-left-radius: 100%;
+  z-index: 2;
+}
+
+._window {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  border: 1px solid $default;
+  background-color: $bg;
+}
+
+._outside {
+  background-color: $bg-out;
+  z-index: 0;
+}
+
+._toilet-top {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  border: 1px solid $item;
+  boreder-radius: 4px;
+}
+
+._toilet-seat {
+  position: absolute;
+  width: 12px;
+  height: 20px;
+  border: 1px solid $item;
+  border-radius: 100%;
+}
+
+ ._sink {
+   position: absolute;
+   width: 40px;
+   height: 15px;
+   border: 1px solid $item;
+   .inner {
+     position: absolute;
+     right: 0;
+     bottom: 2px;
+     width: 20px;
+     height: 8px;
+     border: 1px solid $item;
+   }
+
+   .faucet {
+     position: absolute;
+     top: 1px;
+     right: 7px;
+     width: 2px;
+     height: 6px;
+     background-color: $item;
+     transform: rotate(18deg);
+   }
+
+   .container {
+     position: absolute;
+     top: 1px;
+     right: 12px;
+     width: 5px;
+     height: 3px;
+     background-color: $item;
+   }
+}
+
+._bed {
+  position: absolute;
+  display: flex;
+  width: 80px;
+  height: 50px;
+  border: 2px solid $item;
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    border: 2px solid $item;
+
+    .pillow {
+      margin-left: auto;
+      margin-right: 2px;
+      width: 12px;
+      height: 15px;
+      background-color: $item;
+
+      &:nth-child(1) {
+
+        margin-bottom: 3px;
+      }
+    }
+  }
+}
+
+ ._bedroom-table {
+   position: absolute;
+   width: 70px;
+   height: 20px;
+   border: 1px solid $item;
+}
+
+._bedroom-chair {
+  position: absolute;
+  width: 15px;
+  height: 10px;
+  border: 1px solid $item;
+  border-radius: 100%;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+._lines {
+      position: absolute;
+      width: 32px;
+      background-image:
+      linear-gradient(90deg, transparent 79px, $item 79px, $item 81px, transparent 81px),
+linear-gradient($item .1em, transparent .1em);
+      background-size: 100% 1.2em;
+      background-color: $bg;
+      z-index: 1;
+    }
+
+._floor {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  
+  > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+}
+
+.floor-plan {
+  min-width: 500px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+/* floor 1 */
+.floor-1 {
+  @extend ._floor;
+  grid: 80px 60px 60px 120px 80px /
+     100px 75px 25px 45px 55px 100px ;
+  
+  .kitchen {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    
+    @extend ._border;
+    border-bottom: none;
+    
+    .door {
+      @extend ._door;
+      bottom: 0;
+      right: 0;
+      transform: scaleX(-1) rotate(90deg);
+      border-bottom-color: $bg-out;
+      background-color: $bg-out;
+    }
+    
+    .window {
+      @extend ._window;
+      right: -13px;
+      top: 16px;
+      transform: rotate(90deg);
+    }
+    
+    .counter {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 27px;
+      border-bottom: 1px solid $item;
+    }
+    
+    .ref {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $item;
+    }
+    
+    .sink {
+      position: absolute;
+      top: 0;
+      width: 25px;
+      height: 20px;
+      border-radius: 2px;
+      background-color: $item;
+      
+      .inner {
+        position: relative;
+        margin-top: 1px;
+        margin-left: 1px;
+        width: 80%;
+        height: 80%;
+        background-color: $item;
+        border: 1px solid $bg;
+        
+        .faucet {
+          position: absolute;
+          top: -1px;
+          left: 11px;
+          width: 2px;
+          height: 10px;
+          background-color: $bg;
+          transform: rotate(18deg);
+        }
+      }
+    }
+    .stove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 25px;
+      height: 20px;
+      border: 1px solid $item;
+      .circle {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: $item;
+        border-radius: 100%;
+        
+        &:nth-child(1) {
+          left: 4px;
+          top: 1px;
+        }
+        
+        &:nth-child(2) {
+          left: 4px;
+          bottom: 1px;
+        }
+        
+        &:nth-child(3) {
+          right: 4px;
+          top: 1px;
+        }
+        
+        &:nth-child(4) {
+          right: 4px;
+          bottom: 1px;
+        }
+      }
+    }
+    .bar {
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 30%;
+      height: 12px;
+      border: 1px solid $item;
+      border-left: none;
+    }
+    
+    ._bar-stool {
+      position: absolute;
+      bottom: -35px;
+      width: 15px;
+      height: 15px;
+      border-radius: 100%;
+      background-color: $item;
+    }
+    
+    .bar-stool-1 {
+      @extend ._bar-stool;
+      left: 3px;
+    }
+    
+    .bar-stool-2 {
+      @extend ._bar-stool;
+      left: 27px;
+    }
+  }
+  
+  .outside-1 {
+    grid-column-start: 3;
+    grid-column-end: fr;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    
+    @extend ._outside;
+  }
+  
+  .dining {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    
+    @extend ._border;
+    border-top: none;
+    border-bottom: none;
+    
+    .table {
+      position: absolute;
+      top: 50px;
+      left: 20%;
+      width: 40px;
+      height: 60px;
+      border: 1px solid $item;
+      
+      ._chair {
+        position: absolute;
+        width: 12px;
+        height: 20px;
+        border: 1px solid $item;
+        border-bottom: 0;
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+      }
+      
+      .chair-1 {
+        @extend ._chair;
+        left: -17px;
+        top: 2px;
+      }
+      
+      .chair-2 {
+        @extend ._chair;
+        left: -17px;
+        top: 34px;
+      }
+      
+      .chair-3 {
+        @extend ._chair;
+        transform: scaleX(-1);
+        right: -17px;
+        top: 2px;
+      }
+      
+      .chair-4 {
+        @extend ._chair;
+        transform: scaleX(-1);
+        right: -17px;
+        top: 34px;
+      }
+    }
+  }
+  
+  .living {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    
+    @extend ._border;
+    border-top: none;
+    border-right: none;
+    
+    .door {
+      @extend ._door;
+      right: 2px;
+      bottom: -3px;
+      border-bottom-color: $bg-out;
+      background-color: $bg-out;
+    }
+    
+    .couch-left {
+      position: absolute;
+      display: flex;
+      left: 15px;
+      bottom: 20px;
+      width: 80px;
+      height: 30px;
+      border: 1px double $item;
+    }
+    
+    .couch-right {
+      position: absolute;
+      left: 95px;
+      bottom: 20px;
+      width: 30px;
+      height: 70px;
+      border: 1px double $item;
+    }
+    
+    .couch-inner {
+        width: 70%;
+        height: 85%;
+        border: 1px solid $item;
+        border-radius: 2px;
+      }
+    
+    .table {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      left: 40px;
+      top: 24px;
+      border: 1px solid $item;
+      border-radius: 100%;
+    }
+  }
+  
+  .restroom-1 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    
+    @extend ._border;
+    border-left: none;
+    
+    .door {
+      @extend ._door;
+      width: 20px;
+      height: 25px;
+      bottom: -4px;
+      right: 2px;
+    }
+    
+    .window {
+      @extend ._window;
+      width: 16px;
+      right: 3px;
+      top: -4px;
+    }
+    
+    .shower {
+      position: absolute;
+      left: 0;
+      width: 25px;
+      height: 100%;
+      border-right: 1px solid $item;
+    }
+    
+    .toilet-top {
+      @extend ._toilet-top;
+      top: 0;
+      left: 32px;
+    }
+    
+    .toilet-seat {
+      @extend ._toilet-seat;
+      top: 11px;
+      left: 36px;
+    }
+    
+    .sink {
+      @extend ._sink;
+      right: 0;
+      top: 0;
+    }
+  }
+  
+  .closet {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    
+    @extend ._border;
+    border-left: none;
+    border-top: none;
+    
+    .door {
+      position: absolute;
+      right: -3px;
+      top: 0;
+      width: 3px;
+      height: 60%;
+      background-color: $bg;
+    }
+    
+    .storage {
+      position: absolute;
+      width: 100%;
+      height: 20%;
+      border-bottom: 1px solid $item;
+    }
+  }
+  
+  .bedroom {
+    grid-column-start: 4;
+    grid-column-end: fr;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    
+    @extend ._border;
+    border-left: none;
+    
+    .door {
+      @extend ._door;
+      transform: scaleX(-1);
+      left: 2px;
+      bottom: -3px;
+    }
+    
+    .window {
+      @extend ._window;
+      &:nth-child(2) {
+        width: 40px;
+        top: -4px;
+      }
+      
+      &:nth-child(3) {
+        top: -4px;
+        right: -1px;
+      }
+      
+      &:nth-child(4) {
+        top: 8px;
+        right: -13px;
+        transform: rotate(90deg);
+      }
+      
+      &:nth-child(5) {
+        bottom: 8px;
+        right: -13px;
+        transform: rotate(90deg);
+      }
+      
+      &:nth-child(6) {
+        right: 0;
+        bottom: -4px;
+      }
+    }
+    
+    .bed {
+      @extend ._bed;
+      right: 5px;
+    }
+    
+    ._table {
+      position: absolute;
+      width: 15px;
+      height: 20px;
+      right: 5px;
+      border: 1px solid $item;
+      border-radius: 4px;
+    }
+    
+    .table-1 {
+      @extend ._table;
+      top: 5px;
+    }
+    
+    .table-2 {
+      @extend ._table;
+      bottom: 5px;
+    }
+    
+    .table-3 {
+      @extend ._bedroom-table;
+      left: 5px;
+      top: 3px;
+    }
+    
+    .chair {
+      @extend ._bedroom-chair;
+      left: 17px;
+      top: 27px;
+    }
+  }
+  
+  .stairs {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    
+    @extend ._border;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    
+    .wall {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      height: 70%;
+      
+      @extend ._border-wall;
+      border-bottom: 0;
+    }
+    
+    .lines-1 {
+      @extend ._lines;
+      height: 40%;
+      bottom: 0;
+      left: 5px;
+    }
+    
+    .lines-2 {
+      @extend ._lines;
+      height: 100%;
+      right: 0;
+      border-left: 1px solid $item;
+    }
+  }
+  
+  .restroom-2 {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    
+    @extend ._border;
+    border-top: none;
+    
+    .door {
+      @extend ._door;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 25px;
+      transform: scaleY(-1) rotate(90deg);
+    }
+    
+    .shower {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30px;
+      border-top: 1px solid $item;
+    }
+    
+    .toilet-top {
+      @extend ._toilet-top;
+      right: -7px;
+      bottom: 45px;
+      transform: rotate(90deg);
+    }
+    
+    .toilet-seat {
+      @extend ._toilet-seat;
+      right: 15px;
+      bottom: 40px;
+      transform: rotate(90deg);
+    }
+    
+    .sink {
+      @extend ._sink;
+      right: -12px;
+      top: 15px;
+      transform: rotate(90deg);
+    }
+  }
+  
+  .car-port {
+    grid-column-start: 6;
+    grid-column-end: fr;
+    grid-row-start: 4;
+    grid-row-end: fr;
+    
+    @extend ._outside;
+  }
+  
+  .outside-2 {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 5;
+    grid-row-end: fr;
+    
+    @extend ._outside;
+  }
+}
+
+/* floor 2 */
+.floor-2 {
+  @extend ._floor;
+  margin-bottom: 100px;
+  width: 400px;
+  grid: 80px 60px 60px 120px 80px /
+     2fr 1.5fr 1.5fr;
+  
+  .bedroom {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    
+    @extend ._border;
+  
+    .door {
+      @extend ._door;
+      bottom: -3px;
+      right: 7px;
+    }
+    
+    .window {
+      @extend ._window;
+      top: 24px;
+      right: -23px;
+      width: 40px;
+      transform: rotate(90deg);
+    }
+    
+    .bed {
+      @extend ._bed;
+      left: 2px;
+      top: 2px;
+      transform: scaleX(-1);
+    }
+    
+    .closet {
+      position: absolute;
+      width: 70%;
+      height: 25px;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid $item;
+      border-right: 1px solid $item;
+    }
+    
+    .table {
+      @extend ._bedroom-table;
+      right: -25px;
+      top: 25px;
+      transform: rotate(90deg);
+    }
+    
+    .chair {
+      @extend ._bedroom-chair;
+      right: 22px;
+      top: 10px;
+      transform: rotate(90deg);
+    }
+  }
+  
+  .outside-1 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    
+    @extend ._outside;
+  }
+  
+  .storage {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    
+    @extend ._border;
+    border-left: none;
+    
+    .door {
+      @extend ._door;
+      width: 20px;
+      height: 25px;
+      bottom: -3px;
+      left: 7px;
+      transform: scaleX(-1);
+    }
+    
+    .window {
+      @extend ._window;
+      width: 40px;
+      top: -4px;
+      left: 10px;
+    }
+    
+    ._shelf {
+      position: absolute;
+      height: 15px;
+    }
+    
+    .shelf-1 {
+      @extend ._shelf;
+      width: 100%;
+      top: 0;
+      border-bottom: 1px solid $item;
+    }
+    
+    .shelf-2 {
+      @extend ._shelf;
+      width: 70%;
+      bottom: 0;
+      right: 0;
+      border-top: 1px solid $item;
+      border-left: 1px solid $item;
+    }
+  }
+  
+  .library {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    
+    @extend ._border;
+    border-left: none;
+    
+    .window {
+      @extend ._window;
+      width: 40px;
+      top: -4px;
+      right: 10px;
+    }
+    
+    .shelf-1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 25px;
+      height: 56px;
+      border-right: 1px solid $item;
+      border-bottom: 1px solid $item;
+    }
+    
+    .shelf-2 {
+      position: absolute;
+      width: calc(100% - 25px);
+      height: 20px;
+      top: 0;
+      right: 0;
+      border-bottom: 1px solid $item;
+    }
+    
+    .chair {
+      position: absolute;
+      width: 20px;
+      height: 25px;
+      right: 5px;
+      top: 30px;
+      border: 1px solid $item;
+      border-top-left-radius: 100%;
+      border-bottom-left-radius: 100%;
+      transform: rotate(150deg);
+    }
+    
+    .table {
+      position: absolute;
+      width: 25px;
+      height: 15px;
+      right: 22px;
+      top: 47px;
+      background-color: $item;
+      border-radius: 30%;
+      transform: rotate(60deg);
+    }
+  }
+  
+  .path {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    
+    @extend ._border;
+    border-top: none;
+    border-right: none;
+  }
+  
+  .open {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    
+    @extend ._border;
+    border-top: none;
+    border-right: none;
+    
+    .door {
+      position: absolute;
+      right: 0;
+      top: -3px;
+      width: 33px;
+      height: 3px;
+      background-color: $bg;
+    }
+    
+    .lines-1 {
+      @extend ._lines;
+      height: 40%;
+      bottom: 0;
+      right: 34px;
+      border-left: 1px solid $item;
+    }
+    
+    .lines-2 {
+      @extend ._lines;
+      height: 100%;
+      right: 0;
+      border-left: 1px solid $item;
+    }
+    
+    ._diagonal-lines {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: $item;
+    }
+    
+    .lines-3 {
+      @extend ._diagonal-lines;
+      left: -10px;
+      top: 50px;
+      transform: rotate(20deg);
+    }
+    
+    .lines-4 {
+      @extend ._diagonal-lines;
+      left: -10px;
+      bottom: 50px;
+      transform: rotate(-20deg);
+    }
+  }
+  
+  .balcony {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: fr;
+    background-color: $bg-out;
+    
+    @extend ._border;
+    border-top: none;
+    
+    .door {
+      @extend ._door;
+      left: 4px;
+      top: -3px;
+      transform: rotate(180deg);
+    }
+  }
+  
+  .outside-2 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    
+    @extend ._outside;
+  }
+}

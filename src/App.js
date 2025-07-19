@@ -1,84 +1,135 @@
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
+
+import PlayfulYesNo from './PlayfulYesOrNo/PlayfulYesOrNo';
+import FloorPlan from './FloorPlan/FloorPlan';
+import RoadTripScene from './RoadTrip/RoadTrip';
+import CinemaScene from './Cinema/Cinema';
+import StarryNight from './StarryNight/StarryNight';
 import './App.css';
 
-const App = () => {
-  const [showSecondScreen, setShowSecondScreen] = useState(false);
+// Scenes data
+const scenes = [
+  { key: 'floor', label: 'This one is awesome, but this is secret', status: 'upcoming' },
+  { key: 'cinema', label: 'Cinema', status: 'done' },
+  { key: 'trip', label: 'Road Trip', status: 'done' },
+  { key: 'night', label: 'Starry Night', status: 'upcoming' },
+  { key: 'chess', label: 'Chess', status: 'upcoming' },
+  { key: 'boulder', label: 'Boulder hiking', status: 'upcoming' },
+  { key: 'more', label: 'many more will be added...', status: 'upcoming' },
+];
 
-  // Initialize the No button with static default values
-  const [noButtonPosition, setNoButtonPosition] = useState({ top: '56.2%', left: '60%' });
+// This component renders cards and navigates on click
+function SceneSelector() {
+  const navigate = useNavigate();
 
-  const [clickCounts, setClickCounts] = useState({ yes: 0, no: 0 });
-  const [terminalText, setTerminalText] = useState("oyundari@ozi-mac ~ % ");
-
-  useEffect(() => {
-    if (showSecondScreen) {
-      let index = 0;
-      const terminalMessage = " now we are in a relationship (´｡• ᵕ •｡`) ♡";
-      const typingInterval = setInterval(() => {
-        setTerminalText((prev) => prev + (terminalMessage[index] || ""));
-        index++;
-        if (index > terminalMessage.length) {
-          clearInterval(typingInterval);
-        }
-      }, 100);
-    }
-  }, [showSecondScreen]);
-
-  const handleYesClick = () => {
-    setClickCounts((prev) => ({ ...prev, yes: prev.yes + 1 }));
-    setShowSecondScreen(true);
-  };
-
-  const handleNoHover = () => {
-    setClickCounts((prev) => ({ ...prev, no: prev.no + 1 }));
-
-    // Get the dimensions of the app container
-    const containerWidth = window.innerWidth;
-    const containerHeight = window.innerHeight;
-
-    // Calculate random positions within the screen's bounds
-    const randomTop = Math.random() * (containerHeight - 50) + 'px'; // Avoid going off-screen vertically
-    const randomLeft = Math.random() * (containerWidth - 100) + 'px'; // Avoid going off-screen horizontally
-
-    setNoButtonPosition({ top: randomTop, left: randomLeft });
-  };
-
-  if (showSecondScreen) {
-    return (
-      <div className="app terminal">
-        <div className="terminal-header">
-          <div className="terminal-buttons">
-            <span className="button red"></span>
-            <span className="button yellow"></span>
-            <span className="button green"></span>
-          </div>
-        </div>
-        <div className="terminal-body">
-          <div className="terminal-text">{terminalText}</div>
-        </div>
+  return (
+    <>
+      <h2>What we did</h2>
+      <div className="card-container">
+        {scenes
+          .filter((s) => s.status === 'done')
+          .map((s) => (
+            <div
+              key={s.key}
+              className="scene-card"
+              onClick={() => navigate(`/scene/${s.key}`)}
+            >
+              {s.label}
+            </div>
+          ))}
       </div>
-    );
+
+      <h2>Upcoming</h2>
+      <div className="card-container upcoming">
+        {scenes
+          .filter((s) => s.status === 'upcoming')
+          .map((s) => (
+            <div key={s.key} className="scene-card upcoming disabled">
+              {s.label}
+            </div>
+          ))}
+      </div>
+    </>
+  );
+}
+
+// This component renders the current scene based on URL param
+function SceneRenderer() {
+  const { sceneKey } = useParams();
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <button
+        onClick={() => navigate(-1)}
+        style={{ marginBottom: '1rem', padding: '0.5rem 1rem' }}
+      >
+        ← Back
+      </button>
+      {(() => {
+        switch (sceneKey) {
+          case 'floor':
+            return <FloorPlan />;
+          case 'cinema':
+            return <CinemaScene />;
+          case 'trip':
+            return <RoadTripScene />;
+          case 'night':
+            return <StarryNight />;
+          case 'chess':
+            return <div>Upcoming</div>;
+          default:
+            return <div>Select a scene from above.</div>;
+        }
+      })()}
+    </div>
+  );
+}
+
+function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  // Listen for Enter key ONLY when intro is visible
+  useEffect(() => {
+    if (!showIntro) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        setShowIntro(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showIntro]);
+
+  const handleIntroDone = () => {
+    setShowIntro(false);
+  };
+
+  if (showIntro) {
+    return <PlayfulYesNo onComplete={handleIntroDone} />;
   }
 
   return (
-    <div className="app">
-      <div className="content">
-        <div className="message">I will officially ask you now, Will you be my girlfriend? ❤️</div>
-        <div className="buttons">
-          <button className="yes-button" onClick={handleYesClick}>
-            Yes
-          </button>
-          <button
-            className="no-button"
-            style={noButtonPosition}
-            onMouseEnter={handleNoHover}
-          >
-            No
-          </button>
-        </div>
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<SceneSelector />} />
+          <Route path="/scene/:sceneKey" element={<SceneRenderer />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
-};
+}
 
 export default App;

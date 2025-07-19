@@ -1,116 +1,85 @@
-/* App styling */
-.app {
-  position: relative;
-  text-align: center;
-  height: 100vh;
-  background-image: url('https://wallpapercave.com/wp/wp8332738.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: sans-serif;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.message {
-  color: #003366;
-  font-size: 2rem;
-  margin-bottom: 20px; /* Add spacing between message and buttons */
-}
-
-.buttons {
-  display: flex;
-  gap: 20px; /* Add spacing between the buttons */
-}
-
-.yes-button,
-.no-button {
-  position: absolute;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: #4caf50;
-  color: white;
-  transition: background 0.3s;
-}
-
-.yes-button {
-  background: #4caf50;
-  left: 35%;
-}
-
-.yes-button:hover {
-  background: #45a049;
-}
-
-.no-button {
-  background: #f44336;
-}
-
-.no-button:hover {
-  background: #e57373;
-}
-
-/* Terminal screen styles */
-.terminal {
+.app-container {
+  width: 100vw;
   height: 100vh;
-  background: #1e1e1e;
-  color: #00ff00;
-  font-family: monospace;
-  display: block; /* No flexbox, just block-level layout */
-}
-
-.terminal-header {
-  background: #333;
+  position: relative;
   padding: 10px;
+}
+
+.card-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* Adjusts header content alignment */
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.terminal-buttons {
-  display: flex;
-  gap: 8px;
+.scene-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 24px;
+  height: 150px;
+  border-radius: 16px;
+  cursor: pointer;
+  flex: 1 0 200px;
+  text-align: center;
+  border: 0.5px solid transparent;
+  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/11/gon-and-killua-in-hunter-x-hunter.jpg'); /* Gon + Killua */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
+.upcoming .scene-card:nth-child(1) {
+  background-image: url('https://iheartdogs.com/wp-content/uploads/2022/03/Dog_comforting_best_friend-e1648066368997.jpg');
+  background-position: 10% center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.button.red {
-  background: #ff5f56;
+.scene-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); /* darken overlay */
+  z-index: 1;
 }
 
-.button.yellow {
-  background: #ffbd2e;
+.scene-card:hover {
+  transform: translateY(-8px);
+  border: 2px solid #4db8ff;
+  box-shadow: 0 12px 24px rgba(77, 184, 255, 0.3);
 }
 
-.button.green {
-  background: #27c93f;
+.scene-card.active {
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.7);
 }
 
-.terminal-body {
-  text-align: left; /* Aligns text to the left */
-  white-space: pre-wrap; /* Maintains whitespace formatting */
+.scene-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-.terminal-text {
-  white-space: pre-wrap; /* Prevents text from breaking into new lines */
-  line-height: 1.5; /* Improves readability of multi-line text */
-  word-break: break-word; /* Prevents long text from breaking the layout */
+.scene-card span {
+  position: relative;
+  z-index: 2;
 }
