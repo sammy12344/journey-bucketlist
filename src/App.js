@@ -26,7 +26,6 @@ const scenes = [
   { key: 'more', label: 'many more will be added...', status: 'upcoming' },
 ];
 
-// This component renders cards and navigates on click
 function SceneSelector() {
   const navigate = useNavigate();
 
