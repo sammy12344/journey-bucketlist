@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Undral/static/css/main.f018ed66.css",
-    "main.js": "/Undral/static/js/main.f85ddfe5.js",
-    "static/js/488.209cbf9d.chunk.js": "/Undral/static/js/488.209cbf9d.chunk.js",
-    "index.html": "/Undral/index.html",
-    "main.f018ed66.css.map": "/Undral/static/css/main.f018ed66.css.map",
-    "main.f85ddfe5.js.map": "/Undral/static/js/main.f85ddfe5.js.map",
-    "488.209cbf9d.chunk.js.map": "/Undral/static/js/488.209cbf9d.chunk.js.map"
+    "main.css": "/journey-bucketlist/static/css/main.f018ed66.css",
+    "main.js": "/journey-bucketlist/static/js/main.fdf3dc48.js",
+    "static/js/488.209cbf9d.chunk.js": "/journey-bucketlist/static/js/488.209cbf9d.chunk.js",
+    "index.html": "/journey-bucketlist/index.html",
+    "main.f018ed66.css.map": "/journey-bucketlist/static/css/main.f018ed66.css.map",
+    "main.fdf3dc48.js.map": "/journey-bucketlist/static/js/main.fdf3dc48.js.map",
+    "488.209cbf9d.chunk.js.map": "/journey-bucketlist/static/js/488.209cbf9d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f018ed66.css",
-    "static/js/main.f85ddfe5.js"
+    "static/js/main.fdf3dc48.js"
   ]
 }
