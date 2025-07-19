@@ -5,7 +5,7 @@ const FloorPlan = () => {
   return (
     <div className={styles['floor-plan']}>
       <h1>After I saw you where drawing that flower shop plan, I was inspired to do some research on what I would want to build in the future. 
-        And those two were drawn by coding. I would want to have this kind of small house somewhere in beautiful rural area</h1>
+        And those two a were drawn by coding. I would want to have this kind of small house somewhere in beautiful rural area</h1>
 
       <div className={`${styles['floor-1']} ${styles._grid}`}>
         <div className={styles.kitchen}>
